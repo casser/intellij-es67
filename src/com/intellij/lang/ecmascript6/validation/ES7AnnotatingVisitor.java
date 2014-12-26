@@ -21,6 +21,7 @@ import com.intellij.lang.ecmascript6.psi.ES6FromClause;
 import com.intellij.lang.ecmascript6.psi.ES7AnnotationName;
 import com.intellij.lang.javascript.highlighting.ECMAL4Highlighter;
 import com.intellij.lang.javascript.psi.ecmal4.JSAttributeList;
+import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.psi.PsiElement;
@@ -40,10 +41,12 @@ public class ES7AnnotatingVisitor extends ES6AnnotatingVisitor {
     @Override
     public void visitElement(PsiElement element) {
         if(element instanceof ES7AnnotationName){
-            lineMarker(element, ECMAL4Highlighter.ECMAL4_METADATA, "attribute", this.myHolder);
+            lineMarker(element, DefaultLanguageHighlighterColors.METADATA, "attribute", this.myHolder);
         }else
         if(element instanceof JSAttributeList){
-            lineMarker(element, ECMAL4Highlighter.ECMAL4_KEYWORD, "keyword", this.myHolder);
+            if(element.getTextLength()>0){
+                lineMarker(element, DefaultLanguageHighlighterColors.KEYWORD, "Modifiers", this.myHolder);
+            }
         }
         super.visitElement(element);
     }

@@ -26,13 +26,12 @@
   <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
        on how to target different products -->
   <depends>JavaScript</depends>
-
   <extensions defaultExtensionNs="com.intellij">
     <lang.formatter language="ECMAScript 6" implementationClass="com.intellij.lang.javascript.formatter.ES7FormattingModelBuilder"/>
-    <lang.foldingBuilder order="first, before ECMA6ParserDefinition" language="ECMAScript 6" implementationClass="com.intellij.lang.javascript.folding.ES7FoldingBuilder"/>
-    <annotator order="first, before ECMA6ParserDefinition" language="ECMAScript 6" implementationClass="com.intellij.lang.ecmascript6.validation.ES7AnnotatingVisitor"/>
-    <lang.syntaxHighlighterFactory order="first, before ECMA6ParserDefinition" key="ECMAScript 6"
-                                   implementationClass="com.intellij.lang.javascript.highlighting.ES7SyntaxHighlighterFactory"/>
+    <lang.foldingBuilder order="before JavaScriptAnnotatingVisitor" language="JavaScript" implementationClass="com.intellij.lang.javascript.folding.ES7FoldingBuilder"/>
+    <lang.foldingBuilder order="before ECMA6ParserDefinition" language="ECMAScript 6" implementationClass="com.intellij.lang.javascript.folding.ES7FoldingBuilder"/>
+    <annotator order="first, after ES6AnnotatingVisitor" language="ECMAScript 6" implementationClass="com.intellij.lang.ecmascript6.validation.ES7AnnotatingVisitor"/>
+    <!--lang.syntaxHighlighterFactory order="first, before ECMA6ParserDefinition" key="ECMAScript 6" implementationClass="com.intellij.lang.javascript.highlighting.ES7SyntaxHighlighterFactory"/-->
     <lang.parserDefinition order="first, before ECMA6ParserDefinition" language="ECMAScript 6" implementationClass="com.intellij.lang.javascript.dialects.ES7ParserDefinition"/>
   </extensions>
 
