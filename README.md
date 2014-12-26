@@ -7,7 +7,7 @@ Features
 * ES7 async/await support
 * `traits`, `export`, `import` block folding support
 
-Changeset 
+Changes 
 -------------
 *Version 1.0*
   * [IDEA-134787](https://youtrack.jetbrains.com/issue/IDEA-134784) : Added support for ES7 AtScript Annotations 
