@@ -1,24 +1,31 @@
+/*
+ * Copyright 2014-2015 Sergey Mamyan
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.intellij.lang.ecmascript6.parsing;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.WhitespacesBinders;
 import com.intellij.lang.ecmascript6.ES6ElementTypes;
-import com.intellij.lang.ecmascript6.parsing.ES6Parser;
-import com.intellij.lang.ecmascript6.parsing.ES6StatementParser;
-import com.intellij.lang.javascript.*;
-import com.intellij.lang.javascript.parsing.ExpressionParser;
-import com.intellij.lang.javascript.parsing.StatementParser;
-import com.intellij.lang.javascript.psi.JSElement;
-import com.intellij.lang.javascript.psi.impl.JSCallExpressionImpl;
-import com.intellij.lang.javascript.psi.impl.JSExpressionStatementImpl;
+import com.intellij.lang.javascript.JSBundle;
+import com.intellij.lang.javascript.JSElementTypes;
+import com.intellij.lang.javascript.JSStubElementTypes;
+import com.intellij.lang.javascript.JSTokenTypes;
 import com.intellij.psi.tree.IElementType;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 /**
- * Created by Sergey on 11/26/14.
+ * ES7 Statement Parser
  */
 public class ES7StatementParser extends ES6StatementParser{
     private ES7ExpressionParser getExpressionParser(){
