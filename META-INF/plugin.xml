@@ -1,0 +1,51 @@
+<idea-plugin version="2">
+  <id>com.intellij.lang.javascript.es67</id>
+  <name>JavaScript.next Support Plugin</name>
+  <version>1.0</version>
+  <vendor email="sergey.mamyan@gmail.com" url="https://github.com/casser/intellij-es67">Sergey Mamyan</vendor>
+
+  <description><![CDATA[
+      Javascript ES6/7 syntax improvements and additions.
+      Hope this plugin will be merged in feature to Intellij IDEA
+    ]]></description>
+
+  <change-notes><![CDATA[
+    <h1>Version 1.0</h1>
+    <ul>
+    <li><a href="https://youtrack.jetbrains.com/issue/IDEA-134787">IDEA-134787</a><span> ES7 AtScript Annotations Support</span></li>
+    <li><a href="https://youtrack.jetbrains.com/issue/IDEA-134786">IDEA-134786</a><span> Javascript ES6 async/await support</span></li>
+    <li><a href="https://youtrack.jetbrains.com/issue/IDEA-134785">IDEA-134785</a><span> Javascript import/export parsing errors</span></li>
+    <li><a href="https://youtrack.jetbrains.com/issue/IDEA-134784">IDEA-134784</a><span> JavaScript Indentation Broken In for traits, export, import blocks</span></li>
+    <li><a href="https://youtrack.jetbrains.com/issue/IDEA-134784">IDEA-134784</a><span> traits, export, import block folding</span></li>
+    </ul>
+  ]]></change-notes>
+
+  <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
+  <idea-version since-build="131"/>
+
+  <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
+       on how to target different products -->
+  <depends>JavaScript</depends>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <lang.formatter language="ECMAScript 6" implementationClass="com.intellij.lang.javascript.formatter.ES7FormattingModelBuilder"/>
+    <lang.foldingBuilder order="first, before ECMA6ParserDefinition" language="ECMAScript 6" implementationClass="com.intellij.lang.javascript.folding.ES7FoldingBuilder"/>
+    <annotator order="first, before ECMA6ParserDefinition" language="ECMAScript 6" implementationClass="com.intellij.lang.ecmascript6.validation.ES7AnnotatingVisitor"/>
+    <lang.syntaxHighlighterFactory order="first, before ECMA6ParserDefinition" key="ECMAScript 6"
+                                   implementationClass="com.intellij.lang.javascript.highlighting.ES7SyntaxHighlighterFactory"/>
+    <lang.parserDefinition order="first, before ECMA6ParserDefinition" language="ECMAScript 6" implementationClass="com.intellij.lang.javascript.dialects.ES7ParserDefinition"/>
+  </extensions>
+
+  <application-components>
+    <!-- Add your application components here -->
+  </application-components>
+
+  <project-components>
+    <!-- Add your project components here -->
+  </project-components>
+
+  <actions>
+    <!-- Add your actions here -->
+  </actions>
+
+</idea-plugin>
