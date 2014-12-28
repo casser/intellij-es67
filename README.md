@@ -9,8 +9,10 @@ Features
 
 Changes 
 -------------
+
 *Version 1.0.1*
   * Highlighting bug fix
+
 *Version 1.0*
   * [IDEA-134787](https://youtrack.jetbrains.com/issue/IDEA-134784) : Added support for ES7 AtScript Annotations 
   * [IDEA-134786](https://youtrack.jetbrains.com/issue/IDEA-134786) : Added support for ES7 async/await  
