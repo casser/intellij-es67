@@ -49,7 +49,9 @@ public class ES7SyntaxHighlighterFactory extends ECMA6SyntaxHighlighterFactory {
             super(ECMA6LanguageDialect.DIALECT_OPTION_HOLDER);
             this.myKeysMap.put(JSTokenTypes.STRING_TEMPLATE_PART, DefaultLanguageHighlighterColors.STRING);
             this.myKeysMap.put(JSTokenTypes.AT, DefaultLanguageHighlighterColors.METADATA);
-            this.myKeysMap.put(ES7ElementTypes.ANNOTATION_NAME, DefaultLanguageHighlighterColors.METADATA);
+            this.myKeysMap.put(JSTokenTypes.FROM_KEYWORD, DefaultLanguageHighlighterColors.KEYWORD);
+            this.myKeysMap.put(JSTokenTypes.ASYNC_KEYWORD, DefaultLanguageHighlighterColors.KEYWORD);
+            this.myKeysMap.put(JSTokenTypes.AWAIT_KEYWORD, DefaultLanguageHighlighterColors.KEYWORD);
         }
 
         @NotNull

@@ -17,10 +17,8 @@
 package com.intellij.lang.ecmascript6.validation;
 
 import com.intellij.lang.annotation.AnnotationHolder;
+import com.intellij.lang.atscript.psi.impl.AtScriptAttributeImpl;
 import com.intellij.lang.ecmascript6.psi.ES6FromClause;
-import com.intellij.lang.ecmascript6.psi.ES7AnnotationName;
-import com.intellij.lang.javascript.highlighting.ECMAL4Highlighter;
-import com.intellij.lang.javascript.psi.ecmal4.JSAttributeList;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
@@ -40,13 +38,9 @@ public class ES7AnnotatingVisitor extends ES6AnnotatingVisitor {
 
     @Override
     public void visitElement(PsiElement element) {
-        if(element instanceof ES7AnnotationName){
-            lineMarker(element, DefaultLanguageHighlighterColors.METADATA, "attribute", this.myHolder);
-        }else
-        if(element instanceof JSAttributeList){
-            if(element.getTextLength()>0){
-                lineMarker(element, DefaultLanguageHighlighterColors.KEYWORD, "Modifiers", this.myHolder);
-            }
+        if(element instanceof AtScriptAttributeImpl){
+            lineMarker(element.getFirstChild(), DefaultLanguageHighlighterColors.METADATA, "attribute", this.myHolder);
+            lineMarker(element.getFirstChild().getNextSibling(), DefaultLanguageHighlighterColors.METADATA, "attribute", this.myHolder);
         }
         super.visitElement(element);
     }

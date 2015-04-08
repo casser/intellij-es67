@@ -18,8 +18,6 @@ package com.intellij.lang.javascript.folding;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ecmascript6.ES6ElementTypes;
-import com.intellij.lang.ecmascript6.parsing.ES7ElementTypes;
-import com.intellij.lang.ecmascript6.psi.ES7Annotations;
 import com.intellij.lang.folding.FoldingDescriptor;
 import com.intellij.lang.javascript.JSTokenTypes;
 import com.intellij.openapi.editor.Document;
@@ -33,9 +31,6 @@ import java.util.List;
  * ES7 Folding Builder
  */
 public class ES7FoldingBuilder extends JavaScriptFoldingBuilder {
-    static final TokenSet TRAIT = TokenSet.create(
-        ES6ElementTypes.TRAIT
-    );
     static final TokenSet EXPORT_IMPORT = TokenSet.create(
         ES6ElementTypes.IMPORT_DECLARATION,
         ES6ElementTypes.EXPORT_DECLARATION
@@ -50,29 +45,35 @@ public class ES7FoldingBuilder extends JavaScriptFoldingBuilder {
                 ));
             }
         }else
-        if(TRAIT.contains(node.getElementType())){
-            ASTNode lb = node.findChildByType(JSTokenTypes.LBRACE);
-            if(lb!=null){
-                descriptors.add(new FoldingDescriptor(node,
-                    new TextRange(lb.getStartOffset(),node.getStartOffset()+node.getTextLength())
-                ));
+        if(ES6ElementTypes.ATTRIBUTE_LIST.equals(node.getElementType())){
+            if(node.getTextRange().getLength()>0){
+                descriptors.add(new FoldingDescriptor(node,node.getTextRange()));
             }
         }else
-        if(ES7ElementTypes.ANNOTATIONS.equals(node.getElementType())){
-            descriptors.add(new FoldingDescriptor(node,node.getTextRange()));
+        if(ES6ElementTypes.PARAMETER_LIST.equals(node.getElementType())){
+            ASTNode parent = node.getTreeParent();
+            if(
+                ES6ElementTypes.FUNCTION_DECLARATION.equals(parent.getElementType()) &&
+                ES6ElementTypes.CLASS.equals(parent.getTreeParent().getElementType())
+            ){
+                descriptors.add(new FoldingDescriptor(node,node.getTextRange()));
+            }
         }
         return super.appendDescriptors(node, document, descriptors);
     }
     protected String getLanguagePlaceholderText(@NotNull ASTNode node, @NotNull TextRange range) {
-        if(ES7ElementTypes.ANNOTATIONS.equals(node.getElementType())){
-            return ((ES7Annotations)node.getPsi()).getFoldingText();
+        if(ES6ElementTypes.ATTRIBUTE_LIST.equals(node.getElementType())){
+            return "@(..)";
+        }else
+        if(ES6ElementTypes.PARAMETER_LIST.equals(node.getElementType())){
+            return "(...)";
         }else
         if(EXPORT_IMPORT.contains(node.getElementType())){
             return "{...}";
-        }else
+        }/*else
         if(TRAIT.contains(node.getElementType())){
             return "{...}";
-        }
+        }*/
         return super.getLanguagePlaceholderText(node, range);
     }
 }

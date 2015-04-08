@@ -17,18 +17,16 @@
 package com.intellij.lang.ecmascript6.parsing;
 
 
-import com.intellij.lang.ITokenTypeRemapper;
 import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.javascript.JSTokenTypes;
-import com.intellij.psi.tree.IElementType;
+import com.intellij.lang.atscript.AtScriptParser;
 
 /**
  * ES7 Parser
  */
-public class ES7Parser extends ES6Parser {
+public class ES7Parser extends AtScriptParser {
     public ES7Parser(PsiBuilder builder) {
         super(builder);
-        builder.setTokenTypeRemapper(new ITokenTypeRemapper() {
+        /*builder.setTokenTypeRemapper(new ITokenTypeRemapper() {
             @Override
             public IElementType filter(IElementType source, int start, int end, CharSequence text) {
                 if(source == JSTokenTypes.BAD_CHARACTER && '@'==text.charAt(start)) {
@@ -36,9 +34,9 @@ public class ES7Parser extends ES6Parser {
                 }
                 return source;
             }
-        });
-        this.myStatementParser = new ES7StatementParser(this);
-        this.myFunctionParser = new ES7FunctionParser(this);
+        });*/
+        this.myStatementParser  = new ES7StatementParser(this);
+        this.myFunctionParser   = new ES7FunctionParser(this);
         this.myExpressionParser = new ES7ExpressionParser(this);
     }
 }

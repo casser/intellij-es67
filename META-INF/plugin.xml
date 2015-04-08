@@ -1,7 +1,7 @@
 <idea-plugin version="2">
   <id>com.intellij.lang.javascript.es67</id>
   <name>JavaScript.next Support Plugin</name>
-  <version>1.0.1</version>
+  <version>1.1.0</version>
   <vendor email="sergey.mamyan@gmail.com" url="https://github.com/casser/intellij-es67">Sergey Mamyan</vendor>
 
   <description><![CDATA[
@@ -10,6 +10,17 @@
     ]]></description>
 
   <change-notes><![CDATA[
+    <h1>Version 1.1.0</h1>
+    <p>Support only Intellij IDEA 14.1.x</p>
+    <p>Intellij IDEA 14.1.x now support ES6/AtScript natively, but still have syntax several issues, this plugin will fix following</p>
+    <ul>
+      <li>Migration to Intellij Idea 14.1.x (with AtScript support)</li>
+      <li>Annotated imports</li>
+      <li>Class members modifiers bug fix.</li>
+      <li>Static members annotations bug fix.</li>
+      <li>Indentation bug fixes.</li>
+      <li>Syntax highlights for annotations and async,await,from</li>
+    </ul>
     <h1>Version 1.0.1</h1>
     <ul>
       <li>Highlighting bug fix</li>
@@ -25,20 +36,25 @@
   ]]></change-notes>
 
   <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-  <idea-version since-build="131"/>
+  <idea-version since-build="141"/>
 
   <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
        on how to target different products -->
   <depends>JavaScript</depends>
-  <extensions defaultExtensionNs="com.intellij">
-    <lang.formatter language="ECMAScript 6" implementationClass="com.intellij.lang.javascript.formatter.ES7FormattingModelBuilder"/>
-    <lang.foldingBuilder order="before JavaScriptAnnotatingVisitor" language="JavaScript" implementationClass="com.intellij.lang.javascript.folding.ES7FoldingBuilder"/>
-    <lang.foldingBuilder order="before ECMA6ParserDefinition" language="ECMAScript 6" implementationClass="com.intellij.lang.javascript.folding.ES7FoldingBuilder"/>
-    <annotator order="first, after ES6AnnotatingVisitor" language="ECMAScript 6" implementationClass="com.intellij.lang.ecmascript6.validation.ES7AnnotatingVisitor"/>
-    <!--lang.syntaxHighlighterFactory order="first, before ECMA6ParserDefinition" key="ECMAScript 6" implementationClass="com.intellij.lang.javascript.highlighting.ES7SyntaxHighlighterFactory"/-->
-    <lang.parserDefinition order="first, before ECMA6ParserDefinition" language="ECMAScript 6" implementationClass="com.intellij.lang.javascript.dialects.ES7ParserDefinition"/>
-  </extensions>
 
+  <extensions defaultExtensionNs="com.intellij">
+    <annotator order="first, after ES6AnnotatingVisitor" language="AtScript" implementationClass="com.intellij.lang.ecmascript6.validation.ES7AnnotatingVisitor"/>
+    <lang.formatter order="FIRST" language="AtScript" implementationClass="com.intellij.lang.javascript.formatter.ES7FormattingModelBuilder"/>
+    <lang.formatter order="FIRST" language="JavaScript" implementationClass="com.intellij.lang.javascript.formatter.ES7FormattingModelBuilder"/>
+    <lang.foldingBuilder order="LAST" language="JavaScript" implementationClass="com.intellij.lang.javascript.folding.ES7FoldingBuilder"/>
+    <lang.syntaxHighlighterFactory order="first, before ECMA6ParserDefinition" key="AtScript" implementationClass="com.intellij.lang.javascript.highlighting.ES7SyntaxHighlighterFactory"/>
+    <lang.parserDefinition order="first, before AtScriptParserDefinition" language="AtScript" implementationClass="com.intellij.lang.javascript.dialects.ES7ParserDefinition"/>
+    <!--resolveScopeProvider implementation="com.intellij.lang.ES7ResolveScopeProvider"/-->
+  </extensions>
+  <extensions defaultExtensionNs="JavaScript">
+    <!--elementScopeProvider language="AtScript" implementationClass="com.intellij.lang.ES7ResolveScopeProvider"/-->
+    <predefinedLibraryProvider implementation="com.intellij.lang.ES7LibraryProvider"/>
+  </extensions>
   <application-components>
     <!-- Add your application components here -->
   </application-components>

@@ -19,6 +19,7 @@ package com.intellij.lang.javascript.dialects;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
+import com.intellij.lang.atscript.AtScriptParser;
 import com.intellij.lang.ecmascript6.parsing.ES7Parser;
 import com.intellij.lang.javascript.JSFlexAdapter;
 import com.intellij.lexer.Lexer;
@@ -29,16 +30,9 @@ import org.jetbrains.annotations.NotNull;
 /**
  * ES7 Parser Definition
  */
-public class ES7ParserDefinition extends ECMA6ParserDefinition {
-    @NotNull
-    public Lexer createLexer(Project project) {
-        return new JSFlexAdapter(ECMA6LanguageDialect.DIALECT_OPTION_HOLDER);
-    }
-
+public class ES7ParserDefinition extends AtScriptParserDefinition {
     @NotNull
     public PsiParser createParser(Project project) {
-
-
         return new PsiParser() {
             @NotNull
             public ASTNode parse(IElementType root, PsiBuilder builder) {
@@ -47,4 +41,5 @@ public class ES7ParserDefinition extends ECMA6ParserDefinition {
             }
         };
     }
+
 }
