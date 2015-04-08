@@ -16,7 +16,6 @@
 
 package com.intellij.lang.javascript.highlighting;
 
-import com.intellij.lang.ecmascript6.parsing.ES7ElementTypes;
 import com.intellij.lang.javascript.JSTokenTypes;
 import com.intellij.lang.javascript.dialects.ECMA6LanguageDialect;
 import com.intellij.lang.javascript.dialects.ECMA6SyntaxHighlighterFactory;
